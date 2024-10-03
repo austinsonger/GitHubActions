@@ -4,11 +4,11 @@
 #
 #  vim:ts=2:sts=2:sw=2:et
 #
-#  https://github.com/HariSekhon/GitHub-Actions
+#  https://github.com/austinsonger/GitHubActions
 #
 #  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback
 #
-#  https://www.linkedin.com/in/HariSekhon
+#  https://www.linkedin.com/in/austinsonger
 #
 
 # ============================================================================ #
@@ -17,7 +17,7 @@
 
 # Generates code scanning alerts in GitHub's Security tab -> Code scanning alerts
 
-# https://semgrep.dev/docs/semgrep-ci/sample-ci-configs/#github-actions
+# https://semgrep.dev/docs/semgrep-ci/sample-ci-configs/#GitHubActions
 
 ---
 name: Semgrep
@@ -139,7 +139,7 @@ jobs:
       #      p/secrets
       #      p/semgrep-misconfigurations
       #      p/semgrep-rule-lints
-      #      p/github-actions
+      #      p/GitHubActions
       #      p/ci
       #      p/owasp-top-ten
       #      p/command-injection

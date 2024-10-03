@@ -4,11 +4,11 @@
 #
 #  vim:ts=2:sts=2:sw=2:et
 #
-#  https://github.com/HariSekhon/GitHub-Actions
+#  https://github.com/austinsonger/GitHubActions
 #
 #  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback
 #
-#  https://www.linkedin.com/in/HariSekhon
+#  https://www.linkedin.com/in/austinsonger
 #
 
 # ============================================================================ #
@@ -145,7 +145,7 @@ jobs:
           REGISTRY: ${{ steps.aws-ecr-login.outputs.registry }}
         run: echo "DOCKER_IMAGE=$REGISTRY/$AWS_ECR_REPO" >> "$GITHUB_ENV"
 
-      - uses: HariSekhon/GitHub-Actions/generate-docker-tags@master
+      - uses: austinsonger/GitHubActions/generate-docker-tags@master
 
       - name: Generate environment variable DOCKER_IMAGE_CACHE
         if: ${{ inputs.max-cache }}
@@ -184,7 +184,7 @@ jobs:
       #
       #   jobs:
       #     docker_build:
-      #       uses: HariSekhon/GitHub-Actions/.github/workflows/docker_build_aws_ecr.yaml@master
+      #       uses: austinsonger/GitHubActions/.github/workflows/docker_build_aws_ecr.yaml@master
       #       with:
       #         max-cache: true
       #         ...

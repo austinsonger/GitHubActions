@@ -3,18 +3,18 @@
 #  Author: Hari Sekhon
 #  Date: [% DATE  # Tue Feb 4 09:53:28 2020 +0000 %]
 #
-#  [% URL  # https://github.com/HariSekhon/GitHub-Actions %]
+#  [% URL  # https://github.com/austinsonger/GitHubActions %]
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
 #  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
 #
-#  https://www.linkedin.com/in/HariSekhon
+#  https://www.linkedin.com/in/austinsonger
 #
 
-# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-GitHubActions
 #
-# https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions
+# https://docs.github.com/en/actions/security-guides/security-hardening-for-GitHubActions
 
 # MarketPlace:  https://github.com/marketplace?type=actions
 #               https://github.com/marketplace?query=publisher%3Aactions&type=actions
@@ -29,13 +29,13 @@ name: My Workflow
 #                             E n v i r o n m e n t
 # ============================================================================ #
 
-# https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
+# https://docs.github.com/en/actions/learn-GitHubActions/environment-variables#default-environment-variables
 
 # XXX: You can now set default environment variables at the repo or organization level:
 #
-# https://docs.github.com/en/actions/learn-github-actions/variables#defining-configuration-variables-for-multiple-workflows
+# https://docs.github.com/en/actions/learn-GitHubActions/variables#defining-configuration-variables-for-multiple-workflows
 
-# https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
+# https://docs.github.com/en/actions/learn-GitHubActions/contexts#github-context
 #
 # GITHUB_WORKFLOW = name of the workflow (set at top of this file)
 # GITHUB_REPOSITORY = owner/repo
@@ -73,14 +73,14 @@ env:
   # GCP
   #DOCKER_IMAGE: "${{env.GCR_REGISTRY}}/${{env.CLOUDSDK_CORE_PROJECT}}/${{env.APP}}"
   # DockerHub
-  #DOCKER_IMAGE: "harisekhon/${{env.APP}}"
+  #DOCKER_IMAGE: "austinsonger/${{env.APP}}"
 
   DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
   DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
 
   GITHUB_USER: ${{ secrets.GITHUB_USER }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  GHCR_REGISTRY: ghcr.io/harisekhon
+  GHCR_REGISTRY: ghcr.io/austinsonger
   # for Git Merge branch jobs
   #
   GIT_USERNAME: 'GitHub Actions'
@@ -133,14 +133,14 @@ env:
   TERRAGRUNT_NON_INTERACTIVE: "true"
   TF_WORKSPACE: ${{ env.ENV }}  # run same code against multiple environments
 
-  # prevent script injection from inputs - https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
+  # prevent script injection from inputs - https://docs.github.com/en/actions/security-guides/security-hardening-for-GitHubActions#using-an-intermediate-environment-variable
   SANITIZED_INPUT: ${{ inputs.someuntrusted || github.event.inputs.someuntrusted }}
 
 # ============================================================================ #
 #                                T r i g g e r s
 # ============================================================================ #
 
-# https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows
+# https://docs.github.com/en/actions/learn-GitHubActions/events-that-trigger-workflows
 
 on:
   push:
@@ -305,13 +305,13 @@ jobs:
     with:
       debug: ${{ github.event.inputs.debug }}
   call_public_action:
-    uses: HariSekhon/GitHub-Actions/path/to/dir@master  # where action.yaml is
+    uses: austinsonger/GitHubActions/path/to/dir@master  # where action.yaml is
     with:
       debug: ${{ github.event.inputs.debug }}
   reusable_workflow:
     if: github.event.repository.fork == false
     name: NAME
-    uses: HariSekhon/GitHub-Actions/.github/workflows/some-workflow.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/some-workflow.yaml@master
     environment:
       name: production  # use Environment with approval and different Secrets
       url: https://domain.com/webapp  # puts a link in the GitHub Actions deployment page
@@ -342,10 +342,10 @@ jobs:
     # if triggered from another workflow using workflow_run above, check that workflow succeeded before running
     #if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
-    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-GitHubActions#permissions
     permissions:
       contents: read
-      # both needed for code scanning tools to write GitHub Security tab alerts (eg. https://github.com/HariSekhon/GitHub-Actions/blob/master/.github/workflows/tfsec.yaml)
+      # both needed for code scanning tools to write GitHub Security tab alerts (eg. https://github.com/austinsonger/GitHubActions/blob/master/.github/workflows/tfsec.yaml)
       #actions: read
       #security-events: write
 
@@ -491,7 +491,7 @@ jobs:
       #    path: ''  # to checkout dir under $GITHUB_WORKSPACE, if absolute dir outside or $GITHUB_WORKSPACE gets error:
                      #    Error: Repository path '/var/jenkins_home/jenkins' is not under '/__w/Jenkins/Jenkins'
 
-      # https://github.com/aws-actions/configure-aws-credentials#configure-aws-credentials-action-for-github-actions
+      # https://github.com/aws-actions/configure-aws-credentials#configure-aws-credentials-action-for-GitHubActions
       - uses: aws-actions/configure-aws-credentials@v2
         #name: Configure AWS credentials
         id: configure-aws-credentials  # id is necessary to extract AWS_ACCOUNT_ID further down
@@ -500,7 +500,7 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_DEFAULT_REGION }}
-          #role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/my-github-actions-role
+          #role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/my-GitHubActions-role
            #role-duration-seconds: 43200 # default: 21600 (6 hours), but you could have a session valid token for 12 hours
 
       - name: AWS CLI version
@@ -621,11 +621,11 @@ jobs:
     name: DockerHub Build
     # XXX: stop this workflow being manually run on other branches if workflow_dispatch is defined
     if: ( github.ref_name == 'master' || github.ref_name == 'main' || github.ref_name == 'docker' ) && github.event.repository.fork == false
-    uses: HariSekhon/GitHub-Actions/.github/workflows/dockerhub_build.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/dockerhub_build.yaml@master
     with:
-      repo: harisekhon/bash-tools
+      repo: austinsonger/bash-tools
       tags: latest ubuntu
-      dockerfile-repo: HariSekhon/Dockerfiles
+      dockerfile-repo: austinsonger/Dockerfiles
       context: Dockerfiles/devops-bash-tools-alpine
     secrets:
       DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
@@ -638,12 +638,12 @@ jobs:
     name: Docker Build
     # XXX: stop this workflow being manually run on other branches if workflow_dispatch is defined
     if: ( github.ref_name == 'master' || github.ref_name == 'main' || github.ref_name == 'docker' ) && github.event.repository.fork == false
-    uses: HariSekhon/GitHub-Actions/.github/workflows/docker_build.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/docker_build.yaml@master
     with:
       repo_tags: |
-        harisekhon/bash-tools:ubuntu
-        ghcr.io/harisekhon/bash-tools:ubuntu
-      dockerfile-repo: HariSekhon/Dockerfiles
+        austinsonger/bash-tools:ubuntu
+        ghcr.io/austinsonger/bash-tools:ubuntu
+      dockerfile-repo: austinsonger/Dockerfiles
       context: Dockerfiles/devops-bash-tools-alpine
     secrets:
       DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
@@ -659,7 +659,7 @@ jobs:
     # XXX: path must include /.github/workflows/ and @<branch/tag/hashref>, otherwise you may get these errors:
     #       invalid value workflow reference: references to workflows must be rooted in '.github/workflows'
     #       invalid value workflow reference: no version specified
-    uses: HariSekhon/GitHub-Actions/.github/workflows/docker_build_aws_ecr.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/docker_build_aws_ecr.yaml@master
     with:
       #repo: ${{ env.APP }}  # env not accessible here
       repo: MYREPO
@@ -922,7 +922,7 @@ jobs:
             backend/
 
       # ======== or inline Script =========
-      # or consider using an external script to do all of the below like aws_ecr_docker_build_push.sh from DevOps Bash tools repo - https://github.com/HariSekhon/DevOps-Bash-tools
+      # or consider using an external script to do all of the below like aws_ecr_docker_build_push.sh from DevOps Bash tools repo - https://github.com/austinsonger/DevOps-Bash-tools
       #
       # see Setup section above for more info
       - uses: aws-actions/configure-aws-credentials@v2
@@ -993,7 +993,7 @@ jobs:
 
       # ======== Scan after build =========
       - name: Docker Scan
-        run: docker scan "${{env.DOCKER_IMAGE}}:latest"  # requires docker-scan-cli plugin (see HariSekhon/DevOps-Bash-tools install/install_docker_scan.sh)
+        run: docker scan "${{env.DOCKER_IMAGE}}:latest"  # requires docker-scan-cli plugin (see austinsonger/DevOps-Bash-tools install/install_docker_scan.sh)
 
   # ============================================================================ #
   #                                  D e p l o y
@@ -1073,7 +1073,7 @@ jobs:
   merge_production_to_staging:
     if: github.ref_name == 'production'
     name: Merge Production Branch to Staging Branch (hotfix backports)
-    uses: HariSekhon/GitHub-Actions/.github/workflows/merge-branch.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/merge-branch.yaml@master
     with:
       head: production
       base: staging
@@ -1085,7 +1085,7 @@ jobs:
   validate:
     if: github.event.repository.fork == false
     name: Validate
-    uses: HariSekhon/GitHub-Actions/.github/workflows/validate.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/validate.yaml@master
     with:
       debug: ${{ github.event.inputs.debug }}
 
@@ -1096,7 +1096,7 @@ jobs:
   terraform:
     if: github.event.repository.fork == false
     name: Terraform
-    uses: HariSekhon/GitHub-Actions/.github/workflows/terraform_plan_apply.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/terraform_plan_apply.yaml@master
 
   # ============================================================================ #
   #                                   T F s e c
@@ -1105,7 +1105,7 @@ jobs:
   tfsec:
     if: github.event.repository.fork == false
     name: tfsec
-    uses: HariSekhon/GitHub-Actions/.github/workflows/tfsec.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/tfsec.yaml@master
     permissions:
       actions: read
       contents: read
@@ -1115,7 +1115,7 @@ jobs:
   tfsec_pr_commenter:
     if: github.event.repository.fork == false
     name: tfsec PR commenter
-    uses: HariSekhon/GitHub-Actions/.github/workflows/tfsec-pr-commenter.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/tfsec-pr-commenter.yaml@master
     permissions:
       actions: read
       contents: read
@@ -1130,7 +1130,7 @@ jobs:
     if: ( github.ref_name == 'main' || contains(github.ref_name, 'docker') ) && github.event.repository.fork == false
     needs:
       - docker_build
-    uses: HariSekhon/GitHub-Actions/.github/workflows/trivy_aws_ecr.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/trivy_aws_ecr.yaml@master
     with:
       repo: myapp  # will figure out the ECR path from the secrets below
     secrets:
@@ -1149,7 +1149,7 @@ jobs:
   checkov:
     if: github.event.repository.fork == false
     name: Checkov Scan
-    uses: HariSekhon/GitHub-Actions/.github/workflows/checkov.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/checkov.yaml@master
     #with:
     #  framework: terraform
     permissions:
@@ -1164,7 +1164,7 @@ jobs:
   semgrep:
     if: github.event.repository.fork == false
     name: Semgrep GitHub Security Tab
-    uses: HariSekhon/GitHub-Actions/.github/workflows/semgrep.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/semgrep.yaml@master
     permissions:
       actions: read
       contents: read
@@ -1173,7 +1173,7 @@ jobs:
   semgrep_cloud:
     if: github.event.repository.fork == false
     name: Semgrep Cloud
-    uses: HariSekhon/GitHub-Actions/.github/workflows/semgrep-cloud.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/semgrep-cloud.yaml@master
     secrets:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
 
@@ -1184,7 +1184,7 @@ jobs:
   reviewdog:
     if: github.event.repository.fork == false
     name: reviewdog
-    uses: HariSekhon/GitHub-Actions/.github/workflows/reviewdog.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/reviewdog.yaml@master
     permissions:
       actions: read
       contents: read
@@ -1194,7 +1194,7 @@ jobs:
   reviewdog-pr-check:
     if: github.event.repository.fork == false
     name: reviewdog PR
-    uses: HariSekhon/GitHub-Actions/.github/workflows/reviewdog-pr.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/reviewdog-pr.yaml@master
     permissions:
       actions: read
       contents: read
@@ -1306,7 +1306,7 @@ jobs:
 #      - ubuntu-latest
 #
 #    steps:
-#    - uses: docker://harisekhon/centos-dev
+#    - uses: docker://austinsonger/centos-dev
 #    -  name: build & test
 #       run: make build test
 

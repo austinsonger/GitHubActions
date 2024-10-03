@@ -4,20 +4,20 @@
 #
 #  vim:ts=2:sts=2:sw=2:et
 #
-#  https://github.com/HariSekhon/GitHub-Actions
+#  https://github.com/austinsonger/GitHubActions
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
 #  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
 #
-#  https://www.linkedin.com/in/HariSekhon
+#  https://www.linkedin.com/in/austinsonger
 #
 
 # ============================================================================ #
 #                                 P o l a r i s
 # ============================================================================ #
 
-# Audit may fail on repos with JSON patches such as https://github.com/HariSekhon/Kubernetes-configs:
+# Audit may fail on repos with JSON patches such as https://github.com/austinsonger/Kubernetes-configs:
 #
 #   https://github.com/FairwindsOps/polaris/issues/667
 #
@@ -27,7 +27,7 @@
 #
 # the better solution is to run Polaris inside Kubernetes, see polaris*.yaml in:
 #
-#   https://github.com/HariSekhon/Kubernetes-configs
+#   https://github.com/austinsonger/Kubernetes-configs
 
 ---
 name: Polaris

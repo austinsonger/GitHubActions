@@ -12,31 +12,31 @@ In your GitHub repo, import these workflows by adding small yaml files to the `.
 
 ## Scan for Secrets and Security issues
 
-[![Semgrep](https://github.com/HariSekhon/GitHub-Actions/actions/workflows/semgrep.yaml/badge.svg)](https://github.com/HariSekhon/GitHub-Actions/actions/workflows/semgrep.yaml)
+[![Semgrep](https://github.com/austinsonger/GitHubActions/actions/workflows/semgrep.yaml/badge.svg)](https://github.com/austinsonger/GitHubActions/actions/workflows/semgrep.yaml)
 Alerts appear under the GitHub repo's Security tab -> Code scanning alerts.
 
-[![Semgrep Cloud](https://github.com/HariSekhon/GitHub-Actions/actions/workflows/semgrep-cloud.yaml/badge.svg)](https://github.com/HariSekhon/GitHub-Actions/actions/workflows/semgrep-cloud.yaml) Alerts appear in the https://semgrep.dev dashboard
+[![Semgrep Cloud](https://github.com/austinsonger/GitHubActions/actions/workflows/semgrep-cloud.yaml/badge.svg)](https://github.com/austinsonger/GitHubActions/actions/workflows/semgrep-cloud.yaml) Alerts appear in the https://semgrep.dev dashboard
 
 Create `.github/workflows/semgrep.yaml` for local repo alerts:
 ```yaml
 on: [push]
 jobs:
   semgrep:
-    uses: HariSekhon/GitHub-Actions/.github/workflows/semgrep.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/semgrep.yaml@master
 ```
 or `.github/workflows/semgrep-cloud.yaml` for https://semgrep.dev alerts:
 ```yaml
 on: [push]
 jobs:
   semgrep:
-    uses: HariSekhon/GitHub-Actions/.github/workflows/semgrep-cloud.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/semgrep-cloud.yaml@master
     secrets:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
 ```
 
 ## Analyze your Terraform code security & best practices
 
-[![tfsec](https://github.com/HariSekhon/Terraform/actions/workflows/tfsec.yaml/badge.svg)](https://github.com/HariSekhon/Terraform/actions/workflows/tfsec.yaml)
+[![tfsec](https://github.com/austinsonger/Terraform/actions/workflows/tfsec.yaml/badge.svg)](https://github.com/austinsonger/Terraform/actions/workflows/tfsec.yaml)
 Alerts appear under Security -> Code scanning alerts.
 
 Create `.github/workflows/tfsec.yaml`:
@@ -44,7 +44,7 @@ Create `.github/workflows/tfsec.yaml`:
 on: [push]
 jobs:
   tfsec:
-    uses: HariSekhon/GitHub-Actions/.github/workflows/tfsec.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/tfsec.yaml@master
 ```
 
 
@@ -58,7 +58,7 @@ Apply - applies when merged to default branch, eg. `master` or `main`
 on: [push, pull_request]
 jobs:
   terraform:
-    uses: HariSekhon/GitHub-Actions/.github/workflows/terraform.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/terraform.yaml@master
     with:
       dir: path/to/terraform/code
       args: -var-file=some-other.tfvars
@@ -66,22 +66,22 @@ jobs:
       ...
 ```
 
-For more sophisticated examples including approvals, secrets, branch and path selection etc. see my [Terraform repo](https://github.com/HariSekhon/Terraform)'s templates for [terraform-plan.yaml](https://github.com/HariSekhon/Terraform/blob/master/.github/workflows/terraform-plan.yaml.template) and [terraform-apply.yaml](https://github.com/HariSekhon/Terraform/blob/master/.github/workflows/terraform-apply.yaml.template)
+For more sophisticated examples including approvals, secrets, branch and path selection etc. see my [Terraform repo](https://github.com/austinsonger/Terraform)'s templates for [terraform-plan.yaml](https://github.com/austinsonger/Terraform/blob/master/.github/workflows/terraform-plan.yaml.template) and [terraform-apply.yaml](https://github.com/austinsonger/Terraform/blob/master/.github/workflows/terraform-apply.yaml.template)
 
 
 ## Docker Build and push to DockerHub
 
-[![Docker Build DevOps Bash Tools (Ubuntu)](https://github.com/HariSekhon/Dockerfiles/actions/workflows/docker_build_devops_bash_tools_ubuntu.yaml/badge.svg)](https://github.com/HariSekhon/Dockerfiles/actions/workflows/docker_build_devops_bash_tools_ubuntu.yaml)
+[![Docker Build DevOps Bash Tools (Ubuntu)](https://github.com/austinsonger/Dockerfiles/actions/workflows/docker_build_devops_bash_tools_ubuntu.yaml/badge.svg)](https://github.com/austinsonger/Dockerfiles/actions/workflows/docker_build_devops_bash_tools_ubuntu.yaml)
 
 Create `.github/workflows/dockerhub_build.yaml`:
 ```yaml
 on: [push]
 jobs:
   docker_build:
-    uses: HariSekhon/GitHub-Actions/.github/workflows/dockerhub_build.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/dockerhub_build.yaml@master
     with:
-      repo: harisekhon/bash-tools  # DockerHub user/repo
-      tags: latest ubuntu          # builds, tags as harisekhon/bash-tools:latest and harisekhon/bash-tools:ubuntu and pushes to DockerHub
+      repo: austinsonger/bash-tools  # DockerHub user/repo
+      tags: latest ubuntu          # builds, tags as austinsonger/bash-tools:latest and austinsonger/bash-tools:ubuntu and pushes to DockerHub
       context: devops-bash-tools-ubuntu  # path to dir containing the source and Dockerfile
       #max-cache: true                   # if you need multi-stage caching (uses a separate cache image)
     secrets:
@@ -97,7 +97,7 @@ Create `.github/workflows/docker_build_aws_ecr.yaml`:
 on: [push]
 jobs:
   docker_build:
-    uses: HariSekhon/GitHub-Actions/.github/workflows/docker_build_aws_ecr.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/docker_build_aws_ecr.yaml@master
     with:
       repo: MY_ECR_REPO  # without the 'xxx.dkr.ecr.<region>.amazonaws.com' prefix
     secrets:
@@ -125,7 +125,7 @@ Supports multi-stage build caching using GHCR for intermediate layer caching sin
 
 ## Docker Build and push to multiple registries
 
-Supports building + pushing to any combination of the following, just add the relevant secrets, see [docker_build.yaml](https://github.com/HariSekhon/GitHub-Actions/blob/master/.github/workflows/docker_build.yaml) for details:
+Supports building + pushing to any combination of the following, just add the relevant secrets, see [docker_build.yaml](https://github.com/austinsonger/GitHubActions/blob/master/.github/workflows/docker_build.yaml) for details:
 
 - ACR  - Azure Container Registry
 - ECR  - AWS Elastic Container Registry
@@ -141,11 +141,11 @@ Create `.github/workflows/docker_build.yaml`:
 on: [push]
 jobs:
   docker_build:
-    uses: HariSekhon/GitHub-Actions/.github/workflows/docker_build.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/docker_build.yaml@master
     with:
       repo_tags: |
-        harisekhon/bash-tools:latest
-        ghcr.io/harisekhon/bash-tools:latest
+        austinsonger/bash-tools:latest
+        ghcr.io/austinsonger/bash-tools:latest
       context: devops-bash-tools-ubuntu  # path to dir containing the source and Dockerfile
     # GHCR uses the local github.token, for other registries, add secrets, see docker_build.yaml for details
     secrets:
@@ -156,14 +156,14 @@ jobs:
 
 ## Check for Broken URL Links
 
-[![URL Links](https://github.com/HariSekhon/GitHub-Actions/actions/workflows/url_links.yaml/badge.svg)](https://github.com/HariSekhon/GitHub-Actions/actions/workflows/url_links.yaml)
+[![URL Links](https://github.com/austinsonger/GitHubActions/actions/workflows/url_links.yaml/badge.svg)](https://github.com/austinsonger/GitHubActions/actions/workflows/url_links.yaml)
 
 Create `.github/workflows/url_links.yaml`:
 ```yaml
 on: [push]
 jobs:
   url_links:
-    uses: HariSekhon/GitHub-Actions/.github/workflows/url_links.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/url_links.yaml@master
     with:
 
       # custom ignore inaccessible / internal / partially constructed links or those containing variables
@@ -187,7 +187,7 @@ jobs:
   merge:
     if: github.ref_name == 'production'
     name: Merge Production Branch to Staging Branch (hotfix backports)
-    uses: HariSekhon/GitHub-Actions/.github/workflows/merge-branch.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/merge-branch.yaml@master
     with:
       head: production  # from - optional - if omitted defaults to the trigger branch, which is always 'production' due to the if condition above
       base: staging     # to
@@ -219,7 +219,7 @@ jobs:
   gitlab_mirror:
     name: GitLab Mirror
     if: github.event.repository.fork == false && github.ref_type == 'branch' && github.ref_name == github.event.repository.default_branch
-    uses: HariSekhon/GitHub-Actions/.github/workflows/gitlab-mirror.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/gitlab-mirror.yaml@master
     with:
       #organization: my-org  # optional: mirror your company's repos instead of your personal repos
       repos: ${{ github.event.inputs.repos }}  # if triggering manually, mirror those given repos, if blank, mirror all of them
@@ -238,7 +238,7 @@ on:
 
 jobs:
   aws_codeartifact_python_publish:
-    uses: HariSekhon/GitHub-Actions/.github/workflows/codeartifact_python_publish.yaml@master
+    uses: austinsonger/GitHubActions/.github/workflows/codeartifact_python_publish.yaml@master
     with:
       domain: mycompany     # your AWS CodeArtifact service domain name
       repo: mycompany-core  # your CodeArtifact repo name
@@ -265,16 +265,16 @@ permissions:
   security-events: write
 ```
 These 3 permissions are needed for workflows that report to GitHub Security tab, including:
-- [checkov.yaml](https://github.com/HariSekhon/GitHub-Actions/blob/master/.github/workflows/checkov.yaml)
-- [kics.yaml](https://github.com/HariSekhon/GitHub-Actions/blob/master/.github/workflows/kics.yaml)
-- [semgrep.yaml](https://github.com/HariSekhon/GitHub-Actions/blob/master/.github/workflows/semgrep.yaml)
-- [tfsec.yaml](https://github.com/HariSekhon/GitHub-Actions/blob/master/.github/workflows/tfsec.yaml)
-- [trivy.yaml](https://github.com/HariSekhon/GitHub-Actions/blob/master/.github/workflows/trivy.yaml)
+- [checkov.yaml](https://github.com/austinsonger/GitHubActions/blob/master/.github/workflows/checkov.yaml)
+- [kics.yaml](https://github.com/austinsonger/GitHubActions/blob/master/.github/workflows/kics.yaml)
+- [semgrep.yaml](https://github.com/austinsonger/GitHubActions/blob/master/.github/workflows/semgrep.yaml)
+- [tfsec.yaml](https://github.com/austinsonger/GitHubActions/blob/master/.github/workflows/tfsec.yaml)
+- [trivy.yaml](https://github.com/austinsonger/GitHubActions/blob/master/.github/workflows/trivy.yaml)
 
 
 ## Linting Auto-fixers
 
-For workflows that lint-and-fix code, such as [terraform-fmt-write.yaml](https://github.com/HariSekhon/GitHub-Actions/blob/master/.github/workflows/terraform-fmt-write.yaml), you'll need to grant:
+For workflows that lint-and-fix code, such as [terraform-fmt-write.yaml](https://github.com/austinsonger/GitHubActions/blob/master/.github/workflows/terraform-fmt-write.yaml), you'll need to grant:
 ```yaml
 permissions:
   contents: write       # if called by on: push
@@ -284,7 +284,7 @@ permissions:
 
 ## Creating or Commenting on Pull Requests
 
-For workflows that create or comment on PRs, such as [terraform.yaml](https://github.com/HariSekhon/GitHub-Actions/blob/master/.github/workflows/terraform.yaml) and [tfsec-pr-commenter.yaml](https://github.com/HariSekhon/GitHub-Actions/blob/master/.github/workflows/tfsec-pr-commenter.yaml) you'll need to grant:
+For workflows that create or comment on PRs, such as [terraform.yaml](https://github.com/austinsonger/GitHubActions/blob/master/.github/workflows/terraform.yaml) and [tfsec-pr-commenter.yaml](https://github.com/austinsonger/GitHubActions/blob/master/.github/workflows/tfsec-pr-commenter.yaml) you'll need to grant:
 ```yaml
 permissions:
   contents: read
@@ -294,7 +294,7 @@ permissions:
 
 ## Merging Pull Requests
 
-For workflows that merge PRs, such as [merge-branch.yaml](https://github.com/HariSekhon/GitHub-Actions/blob/master/.github/workflows/merge-branch.yaml) you'll need to grant:
+For workflows that merge PRs, such as [merge-branch.yaml](https://github.com/austinsonger/GitHubActions/blob/master/.github/workflows/merge-branch.yaml) you'll need to grant:
 ```yaml
 permissions:
   contents: write
@@ -304,8 +304,8 @@ permissions:
 
 ## Production
 
-As per [GitHub Actions Security Best Practices](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-third-party-actions), you should consider fixing your `@<ref>` to an exact immutable hashref.
+As per [GitHub Actions Security Best Practices](https://docs.github.com/en/actions/security-guides/security-hardening-for-GitHubActions#using-third-party-actions), you should consider fixing your `@<ref>` to an exact immutable hashref.
 
 Alternatively, you may want to fork this repo to have full control over all updates.
 
-You can create environment branches in your forked repo to stage updates across dev/staging/production and enable the [fork-sync](https://github.com/HariSekhon/GitHub-Actions/blob/master/.github/workflows/fork-sync.yaml) github actions workflow in your fork to keep the master branch sync'd every few hours, and the [fork-update-pr](https://github.com/HariSekhon/GitHub-Actions/blob/master/.github/workflows/fork-update-pr.yaml) github actions workflow to raise GitHub Pull Requests for your environment branches to audit, authorize & control updates.
+You can create environment branches in your forked repo to stage updates across dev/staging/production and enable the [fork-sync](https://github.com/austinsonger/GitHubActions/blob/master/.github/workflows/fork-sync.yaml) github actions workflow in your fork to keep the master branch sync'd every few hours, and the [fork-update-pr](https://github.com/austinsonger/GitHubActions/blob/master/.github/workflows/fork-update-pr.yaml) github actions workflow to raise GitHub Pull Requests for your environment branches to audit, authorize & control updates.

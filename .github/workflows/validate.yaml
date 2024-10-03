@@ -4,11 +4,11 @@
 #
 #  vim:ts=2:sts=2:sw=2:et
 #
-#  https://github.com/HariSekhon/GitHub-Actions
+#  https://github.com/austinsonger/GitHubActions
 #
 #  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback
 #
-#  https://www.linkedin.com/in/HariSekhon
+#  https://www.linkedin.com/in/austinsonger
 #
 
 ---
@@ -34,7 +34,7 @@ on:
       #  type: string
       #  required: true
       #  default: latest
-      # workflow calls only permit string/boolean/number - https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onworkflow_callinputsinput_idtype
+      # workflow calls only permit string/boolean/number - https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-GitHubActions#onworkflow_callinputsinput_idtype
       env:
         description: Environment variables in key=value pairs
         type: string  # pass in string in export shell format eg. MYVAR=myvalue MYVAR2=myvalue2
@@ -78,14 +78,14 @@ jobs:
     name: Validate
     # github.event.repository.fork isn't available in scheduled workflows
     # can't prevent forks of this repo, because also prevents caller workflows
-    #if: github.repository == 'HariSekhon/Github-Actions'
+    #if: github.repository == 'austinsonger/GitHubActions'
     runs-on: ubuntu-latest
     # PyTools contains some extra tools, eg. use validate_yaml.py if check_yaml.sh yamllint dependencies aren't available
     # inputs evaluates to blank and fails to pull - not available at this stage
-    #container: harisekhon/pytools:${{ inputs.docker_image_tag }}
-    #container: harisekhon/pytools:debian
-    container: harisekhon/pytools:centos
-    #container: harisekhon/bash-tools:latest
+    #container: austinsonger/pytools:${{ inputs.docker_image_tag }}
+    #container: austinsonger/pytools:debian
+    container: austinsonger/pytools:centos
+    #container: austinsonger/bash-tools:latest
     steps:
       - name: Environment
         run: env | sort
