@@ -31,7 +31,7 @@ See [Documentation](https://docs.github.com/en/actions/using-workflows/reusing-w
 
 Fork this repo to have full control over all updates via Pull Requests. Create environment branches to stage updates across dev/staging/production.
 
-Forked from [austinsonger/Templates](https://github.com/austinsonger/Templates), for which this is now a submodule.
+Forked from [austinsonger/base-templates](https://github.com/austinsonger/base-templates), for which this is now a submodule.
 
 To see GitHub Contexts available, including undocumented fields, see [austinsonger/GitHubActions-Contexts](https://github.com/austinsonger/GitHubActions-Contexts).
 
@@ -292,7 +292,7 @@ Does nothing:
 
 ### Templates
 
-[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=austinsonger&repo=Templates&theme=ambient_gradient&description_lines_count=3)](https://github.com/austinsonger/Templates)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=austinsonger&repo=Templates&theme=ambient_gradient&description_lines_count=3)](https://github.com/austinsonger/base-templates)
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=austinsonger&repo=Template-repo&theme=ambient_gradient&description_lines_count=3)](https://github.com/austinsonger/Template-repo)
 
 ### Misc
